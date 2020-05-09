@@ -21,6 +21,7 @@ import AutoUpdater from './wallet/autoUpdater';
 import LoginCounter from './wallet/loginCounter';
 import { uiType } from './utils/utils';
 import ProtonConfig from './wallet/protonConfig';
+import Configuration from '../Configure';
 
 export function savedInInstallDir(savePath: string) {
   const programDirectory = path.resolve(remote.app.getAppPath(), '../../');
@@ -404,7 +405,7 @@ ipcRenderer.on('handleSaveAs', () => {
     defaultPath: remote.app.getPath('documents'),
     filters: [
       {
-        name: 'TurtleCoin Wallet File (v0)',
+        name: `${Configuration.coinName} Wallet File (v0)`,
         extensions: ['wallet']
       }
     ]
@@ -443,19 +444,15 @@ ipcRenderer.on('handleOpen', handleOpen);
 eventEmitter.on('handleOpen', handleOpen);
 
 function handleAbout() {
-  remote.shell.openExternal(
-    'http://github.com/turtlecoin/turtle-wallet-proton#readme'
-  );
+  remote.shell.openExternal(Configuration.GitHubRepo);
 }
 
 function handleHelp() {
-  remote.shell.openExternal('https://discord.gg/P7urHQs');
+  remote.shell.openExternal(Configuration.DiscordURL);
 }
 
 function handleIssues() {
-  remote.shell.openExternal(
-    'https://github.com/turtlecoin/turtle-wallet-proton/issues'
-  );
+  remote.shell.openExternal(`${Configuration.GitHubRepo}/issues`);
 }
 
 eventEmitter.on('handleHelp', handleHelp);
@@ -649,7 +646,7 @@ function handleOpen() {
     defaultPath: remote.app.getPath('documents'),
     filters: [
       {
-        name: 'TurtleCoin Wallet File (v0)',
+        name: `${Configuration.coinName} Wallet File (v0)`,
         extensions: ['wallet']
       }
     ]

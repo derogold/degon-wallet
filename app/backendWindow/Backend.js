@@ -12,6 +12,7 @@ import log from 'electron-log';
 import { ipcRenderer } from 'electron';
 import { createObjectCsvWriter } from 'csv-writer';
 import { atomicToHuman, convertTimestamp } from '../mainWindow/utils/utils';
+import Configuration from '../Configure';
 
 export default class Backend {
   notifications: boolean;
@@ -178,7 +179,7 @@ export default class Backend {
     const result = await this.wallet.sendTransactionAdvanced(
       destinations, // destinations
       undefined, // mixin
-      undefined, // fee
+      Configuration.minimumFee, // fee
       paymentID, // paymentID
       undefined, // subwalletsToTakeFrom
       undefined, // changeAddress
@@ -474,7 +475,8 @@ export default class Backend {
     const [openWallet, error] = WalletBackend.openWalletFromFile(
       this.daemon,
       this.walletFile,
-      this.walletPassword
+      this.walletPassword,
+      Configuration
     );
     if (!error) {
       this.walletInit(openWallet);

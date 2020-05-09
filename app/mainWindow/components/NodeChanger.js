@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import { remote, ipcRenderer } from 'electron';
 import { il8n, eventEmitter, session, configManager } from '../index';
 import { uiType } from '../utils/utils';
+import Configuration from '../../Configure';
 
 type Props = {
   darkMode: boolean
@@ -99,7 +100,7 @@ export default class NodeChanger extends Component<Props, State> {
   };
 
   findNode = () => {
-    remote.shell.openExternal('https://explorer.turtlecoin.lol/nodes.html');
+    remote.shell.openExternal(Configuration.nodeListURL);
   };
 
   handleNewNode = () => {

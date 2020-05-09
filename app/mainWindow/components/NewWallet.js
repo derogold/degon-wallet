@@ -12,6 +12,7 @@ import BottomBar from './BottomBar';
 import Redirector from './Redirector';
 import { uiType } from '../utils/utils';
 import { backupToFile, eventEmitter, reInitWallet, config } from '../index';
+import Configuration from '../../Configure';
 
 type State = {
   darkMode: boolean,
@@ -32,7 +33,8 @@ export default class NewWallet extends Component<Props, State> {
     this.state = {
       darkMode: config.darkMode,
       newWallet: WalletBackend.createWallet(
-        new Daemon('blockapi.turtlepay.io', 443)
+        new Daemon('blockapi.turtlepay.io', 443),
+        Configuration
       ),
       activePage: 'generate',
       password: '',
@@ -137,7 +139,8 @@ export default class NewWallet extends Component<Props, State> {
       const [confirmWallet, err] = WalletBackend.importWalletFromSeed(
         new Daemon('blockapi.turtlepay.io', 443),
         100000,
-        confirmSeed
+        confirmSeed,
+        Configuration
       );
 
       // the seed wasn't valid
@@ -166,7 +169,7 @@ export default class NewWallet extends Component<Props, State> {
             defaultPath: remote.app.getPath('documents'),
             filters: [
               {
-                name: 'TurtleCoin Wallet File (v0)',
+                name: `${Configuration.coinName} Wallet File (v0)`,
                 extensions: ['wallet']
               }
             ]

@@ -6,6 +6,7 @@ import log from 'electron-log';
 import LocalizedStrings from 'react-localization';
 import npmPackage from '../package.json';
 import { messageRelayer } from './main.dev';
+import Configuration from './Configure';
 
 export const il8n = new LocalizedStrings({
   // eslint-disable-next-line global-require
@@ -54,9 +55,7 @@ export default class MenuBuilder {
         {
           label: `${il8n.about} ${productName}`,
           click: () => {
-            shell.openExternal(
-              'http://github.com/turtlecoin/turtle-wallet-proton#readme'
-            );
+            shell.openExternal(Configuration.GitHubRepo);
           }
         },
         { type: 'separator' },
@@ -247,17 +246,13 @@ export default class MenuBuilder {
         {
           label: il8n.report_bug,
           click() {
-            shell.openExternal(
-              'https://github.com/turtlecoin/turtle-wallet-proton/issues'
-            );
+            shell.openExternal(`${Configuration.GitHubRepo}/issues`);
           }
         },
         {
           label: il8n.feature_request,
           click() {
-            shell.openExternal(
-              'https://github.com/turtlecoin/turtle-wallet-proton/issues'
-            );
+            shell.openExternal(`${Configuration.GitHubRepo}/issues`);
           }
         }
       ]
@@ -467,25 +462,19 @@ export default class MenuBuilder {
           {
             label: il8n.about,
             click: () => {
-              shell.openExternal(
-                'http://github.com/turtlecoin/turtle-wallet-proton#readme'
-              );
+              shell.openExternal(Configuration.GitHubRepo);
             }
           },
           {
             label: il8n.report_bug,
             click: () => {
-              shell.openExternal(
-                'https://github.com/turtlecoin/turtle-wallet-proton/issues'
-              );
+              shell.openExternal(`${Configuration.GitHubRepo}/issues`);
             }
           },
           {
             label: il8n.feature_request,
             click: () => {
-              shell.openExternal(
-                'https://github.com/turtlecoin/turtle-wallet-proton/issues'
-              );
+              shell.openExternal(`${Configuration.GitHubRepo}/issues`);
             }
           }
         ]

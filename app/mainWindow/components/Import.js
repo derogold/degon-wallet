@@ -11,6 +11,7 @@ import BottomBar from './BottomBar';
 import Redirector from './Redirector';
 import { uiType } from '../utils/utils';
 import { eventEmitter, reInitWallet, config } from '../index';
+import Configuration from '../../Configure';
 
 type State = {
   darkMode: boolean,
@@ -132,7 +133,8 @@ export default class Import extends Component<Props, State> {
       const [restoredWallet, error] = WalletBackend.importWalletFromSeed(
         new Daemon('blockapi.turtlepay.io', 443),
         scanHeight === '' ? 0 : Number(scanHeight),
-        mnemonicSeed
+        mnemonicSeed,
+        Configuration
       );
 
       if (error) {
@@ -164,7 +166,7 @@ export default class Import extends Component<Props, State> {
         defaultPath: remote.app.getPath('documents'),
         filters: [
           {
-            name: 'TurtleCoin Wallet File (v0)',
+            name: `${Configuration.coinName} Wallet File (v0)`,
             extensions: ['wallet']
           }
         ]
