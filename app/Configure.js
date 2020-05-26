@@ -5,7 +5,8 @@
 import { MixinLimit, MixinLimits, Daemon } from 'turtlecoin-wallet-backend';
 import { name, version } from '../package.json';
 
-const Configure = (() => {
+// prettier-ignore
+const Configure = new function () {
   /**
    * If you can't figure this one out, I don't have high hopes
    */
@@ -173,6 +174,6 @@ const Configure = (() => {
   this.GitHubRepo = 'https://github.com/derogold/dego-wallet-pluton';
 
   this.DiscordURL = 'https://derogold.gq';
-})();
+}
 
 export default Configure;

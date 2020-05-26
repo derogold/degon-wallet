@@ -6,7 +6,8 @@ import {
   WalletBackend,
   LogLevel,
   prettyPrintAmount,
-  WalletErrorCode
+  WalletErrorCode,
+  FeeType
 } from 'turtlecoin-wallet-backend';
 import log from 'electron-log';
 import { ipcRenderer } from 'electron';
@@ -179,7 +180,7 @@ export default class Backend {
     const result = await this.wallet.sendTransactionAdvanced(
       destinations, // destinations
       undefined, // mixin
-      Configuration.minimumFee, // fee
+      FeeType.FixedFee(Configuration.minimumFee), // fee
       paymentID, // paymentID
       undefined, // subwalletsToTakeFrom
       undefined, // changeAddress
@@ -388,6 +389,7 @@ export default class Backend {
   async walletInit(wallet: any): Promise<void> {
     this.wallet = wallet;
     this.setLogLevel(this.logLevel);
+    this.wallet.enableAutoOptimization(false);
     this.wallet.on(
       'heightchange',
       (walletBlockCount, localDaemonBlockCount, networkBlockCount) => {
