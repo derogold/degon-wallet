@@ -6,7 +6,7 @@ import ReactTooltip from 'react-tooltip';
 import { clipboard, remote } from 'electron';
 import log from 'electron-log';
 import jdenticon from 'jdenticon';
-import { WalletBackend, Daemon } from 'turtlecoin-wallet-backend';
+import { WalletBackend } from 'turtlecoin-wallet-backend';
 import NavBar from './NavBar';
 import BottomBar from './BottomBar';
 import Redirector from './Redirector';
@@ -33,7 +33,7 @@ export default class NewWallet extends Component<Props, State> {
     this.state = {
       darkMode: config.darkMode,
       newWallet: WalletBackend.createWallet(
-        new Daemon('blockapi.turtlepay.io', 443),
+        Configuration.defaultDaemon,
         Configuration
       ),
       activePage: 'generate',
@@ -137,7 +137,7 @@ export default class NewWallet extends Component<Props, State> {
     if (currentPageNumber === 4) {
       // import the seed so we can confirm it works
       const [confirmWallet, err] = WalletBackend.importWalletFromSeed(
-        new Daemon('blockapi.turtlepay.io', 443),
+        Configuration.defaultDaemon,
         100000,
         confirmSeed,
         Configuration
