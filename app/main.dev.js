@@ -21,6 +21,7 @@ import MenuBuilder from './menu';
 import iConfig from './mainWindow/constants/config';
 import packageInfo from '../package.json';
 import MessageRelayer from './MessageRelayer';
+import Configuration from './Configure';
 
 const windowEvents = new EventEmitter();
 
@@ -99,7 +100,10 @@ if (fs.existsSync(`${programDirectory}/addressBook.json`)) {
   fs.writeFileSync(`${programDirectory}/addressBook.json`, '[]');
 }
 
-const daemonLogFile = path.resolve(directories[1], 'TurtleCoind.log');
+const daemonLogFile = path.resolve(
+  directories[1],
+  `${Configuration.coinName}.log`
+);
 const backendLogFile = path.resolve(directories[1], 'wallet-backend.log');
 fs.closeSync(fs.openSync(daemonLogFile, 'w'));
 
@@ -184,7 +188,7 @@ contextMenu({
       visible: params.selectionText.trim().length === 64,
       click: () => {
         shell.openExternal(
-          `https://explorer.turtlecoin.lol/?search=${encodeURIComponent(
+          `${Configuration.ExplorerURL}/?search=${encodeURIComponent(
             params.selectionText
           )}`
         );

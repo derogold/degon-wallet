@@ -33,7 +33,7 @@ export default class WalletSession {
   daemonConnectionInfo: DaemonConnection = {
     daemonType: 1,
     daemonTypeDetermined: true,
-    host: 'blockapi.turtlepay.io',
+    host: 'dego.bot.tips',
     port: 443,
     ssl: true,
     sslDetermined: true

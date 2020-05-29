@@ -24,6 +24,7 @@ import {
 } from '../index';
 import routes from '../constants/routes';
 import settings from '../constants/settings';
+import Configuration from '../../Configure';
 
 type Props = {
   query: string
@@ -158,7 +159,7 @@ export default class Search extends Component<Props, States> {
     const { query } = this.state;
 
     remote.shell.openExternal(
-      `https://explorer.turtlecoin.lol/?search=${encodeURIComponent(query)}`
+      `${Configuration.ExplorerURL}/?search=${encodeURIComponent(query)}`
     );
   };
 
@@ -166,7 +167,7 @@ export default class Search extends Component<Props, States> {
     const hash = event.target.value;
 
     remote.shell.openExternal(
-      `https://explorer.turtlecoin.lol/?search=${encodeURIComponent(hash)}`
+      `${Configuration.ExplorerURL}/?search=${encodeURIComponent(hash)}`
     );
   };
 

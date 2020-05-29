@@ -6,12 +6,14 @@ import {
   WalletBackend,
   LogLevel,
   prettyPrintAmount,
-  WalletErrorCode
+  WalletErrorCode,
+  FeeType
 } from 'turtlecoin-wallet-backend';
 import log from 'electron-log';
 import { ipcRenderer } from 'electron';
 import { createObjectCsvWriter } from 'csv-writer';
 import { atomicToHuman, convertTimestamp } from '../mainWindow/utils/utils';
+import Configuration from '../Configure';
 
 export default class Backend {
   notifications: boolean;
@@ -178,7 +180,7 @@ export default class Backend {
     const result = await this.wallet.sendTransactionAdvanced(
       destinations, // destinations
       undefined, // mixin
-      undefined, // fee
+      FeeType.FixedFee(Configuration.minimumFee), // fee
       paymentID, // paymentID
       undefined, // subwalletsToTakeFrom
       undefined, // changeAddress
@@ -387,6 +389,7 @@ export default class Backend {
   async walletInit(wallet: any): Promise<void> {
     this.wallet = wallet;
     this.setLogLevel(this.logLevel);
+    this.wallet.enableAutoOptimization(false);
     this.wallet.on(
       'heightchange',
       (walletBlockCount, localDaemonBlockCount, networkBlockCount) => {
@@ -474,7 +477,8 @@ export default class Backend {
     const [openWallet, error] = WalletBackend.openWalletFromFile(
       this.daemon,
       this.walletFile,
-      this.walletPassword
+      this.walletPassword,
+      Configuration
     );
     if (!error) {
       this.walletInit(openWallet);

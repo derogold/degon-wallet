@@ -6,12 +6,13 @@ import ReactTooltip from 'react-tooltip';
 import { clipboard, remote } from 'electron';
 import log from 'electron-log';
 import jdenticon from 'jdenticon';
-import { WalletBackend, Daemon } from 'turtlecoin-wallet-backend';
+import { WalletBackend } from 'turtlecoin-wallet-backend';
 import NavBar from './NavBar';
 import BottomBar from './BottomBar';
 import Redirector from './Redirector';
 import { uiType } from '../utils/utils';
 import { backupToFile, eventEmitter, reInitWallet, config } from '../index';
+import Configuration from '../../Configure';
 
 type State = {
   darkMode: boolean,
@@ -32,7 +33,8 @@ export default class NewWallet extends Component<Props, State> {
     this.state = {
       darkMode: config.darkMode,
       newWallet: WalletBackend.createWallet(
-        new Daemon('blockapi.turtlepay.io', 443)
+        Configuration.defaultDaemon,
+        Configuration
       ),
       activePage: 'generate',
       password: '',
@@ -135,9 +137,10 @@ export default class NewWallet extends Component<Props, State> {
     if (currentPageNumber === 4) {
       // import the seed so we can confirm it works
       const [confirmWallet, err] = WalletBackend.importWalletFromSeed(
-        new Daemon('blockapi.turtlepay.io', 443),
+        Configuration.defaultDaemon,
         100000,
-        confirmSeed
+        confirmSeed,
+        Configuration
       );
 
       // the seed wasn't valid
@@ -166,7 +169,7 @@ export default class NewWallet extends Component<Props, State> {
             defaultPath: remote.app.getPath('documents'),
             filters: [
               {
-                name: 'TurtleCoin Wallet File (v0)',
+                name: `${Configuration.coinName} Wallet File (v0)`,
                 extensions: ['wallet']
               }
             ]

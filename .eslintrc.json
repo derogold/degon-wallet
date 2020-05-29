@@ -27,6 +27,7 @@
     "react/no-array-index-key": false,
     "global-require": 0,
     "flowtype/no-weak-types": "off",
-    "import/prefer-default-export": false
+    "import/prefer-default-export": false,
+    "import/no-cycle": "off"
   }
 }

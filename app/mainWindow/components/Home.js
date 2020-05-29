@@ -15,6 +15,7 @@ import {
   atomicToHuman,
   convertTimestamp
 } from '../utils/utils';
+import Configuration from '../../Configure';
 
 let displayedTransactionCount: number = 50;
 
@@ -111,7 +112,7 @@ export default class Home extends Component<Props, State> {
     const hash = event.target.value;
 
     remote.shell.openExternal(
-      `https://explorer.turtlecoin.lol/?search=${encodeURIComponent(hash)}`
+      `${Configuration.ExplorerURL}/?search=${encodeURIComponent(hash)}`
     );
   };
 
