@@ -184,7 +184,7 @@ export default class NewWallet extends Component<Props, State> {
             defaultPath: remote.app.getPath('documents'),
             filters: [
               {
-                name: 'WrkzCoin Wallet File (v0)',
+                name: `${Configure.coinName} Wallet File (v0)`,
                 extensions: ['wallet']
               }
             ]

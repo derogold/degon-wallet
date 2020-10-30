@@ -166,7 +166,7 @@ export default class Import extends Component<Props, State> {
         defaultPath: remote.app.getPath('documents'),
         filters: [
           {
-            name: `${Configuration.coinName} Wallet File (v0)`,
+            name: `${Configure.coinName} Wallet File (v0)`,
             extensions: ['wallet']
           }
         ]

@@ -517,7 +517,7 @@ export default class Send extends Component<Props, State> {
           multi
           options={this.autoCompleteContacts}
           placeholder={`Enter a ${
-            Configuration.coinName
+            Configure.coinName
           } address or a contact name to send funds to`}
           // eslint-disable-next-line no-unused-vars
           noOptionsMessage={inputValue => null}
