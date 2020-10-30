@@ -1,4 +1,5 @@
 // Copyright (C) 2019 ExtraHash
+// Copyright (C) 2019, WrkzCoin
 //
 // Please see the included LICENSE file for more information.
 import { app, Menu, shell, BrowserWindow } from 'electron';
@@ -6,7 +7,7 @@ import log from 'electron-log';
 import LocalizedStrings from 'react-localization';
 import npmPackage from '../package.json';
 import { messageRelayer } from './main.dev';
-import Configuration from './Configure';
+import Configure from './Configure';
 
 export const il8n = new LocalizedStrings({
   // eslint-disable-next-line global-require
@@ -55,7 +56,9 @@ export default class MenuBuilder {
         {
           label: `${il8n.about} ${productName}`,
           click: () => {
-            shell.openExternal(Configuration.GitHubRepo);
+            shell.openExternal(
+              `${Configure.GitHubRepo}/issues#readme`
+            );
           }
         },
         { type: 'separator' },
@@ -164,6 +167,20 @@ export default class MenuBuilder {
           click: () => {
             this.mainWindow.toggleDevTools();
           }
+        },
+        {
+          label: 'Zoom In',
+          accelerator: 'CommandOrControl+=',
+          click: () => {
+            this.mainWindow.webContents.send('zoomIn');
+          }
+        },
+        {
+          label: 'Zoom Out',
+          accelerator: 'Ctrl+-',
+          click: () => {
+            this.mainWindow.webContents.send('zoomOut');
+          }
         }
       ]
     };
@@ -175,6 +192,20 @@ export default class MenuBuilder {
           accelerator: 'Ctrl+Command+F',
           click: () => {
             this.mainWindow.setFullScreen(!this.mainWindow.isFullScreen());
+          }
+        },
+        {
+          label: 'Zoom In',
+          accelerator: 'CommandOrControl+=',
+          click: () => {
+            this.mainWindow.webContents.send('zoomIn');
+          }
+        },
+        {
+          label: 'Zoom Out',
+          accelerator: 'Ctrl+-',
+          click: () => {
+            this.mainWindow.webContents.send('zoomOut');
           }
         }
       ]
@@ -240,19 +271,23 @@ export default class MenuBuilder {
         {
           label: il8n.support,
           click() {
-            shell.openExternal('https://discord.gg/P7urHQs');
+            shell.openExternal(`${Configure.DiscordURL}`);
           }
         },
         {
           label: il8n.report_bug,
           click() {
-            shell.openExternal(`${Configuration.GitHubRepo}/issues`);
+            shell.openExternal(
+              `${Configure.GitHubRepo}/issues`
+            );
           }
         },
         {
           label: il8n.feature_request,
           click() {
-            shell.openExternal(`${Configuration.GitHubRepo}/issues`);
+            shell.openExternal(
+              `${Configure.GitHubRepo}/issues`
+            );
           }
         }
       ]
@@ -422,6 +457,26 @@ export default class MenuBuilder {
                   click: () => {
                     this.mainWindow.toggleDevTools();
                   }
+                },
+                {
+                  label: 'Zoom In',
+                  accelerator: 'CommandOrControl+=',
+                  click: () => {
+                    this.mainWindow.webContents.send('zoomIn');
+                  }
+                },
+                {
+                  label: 'Zoom Out',
+                  accelerator: 'Ctrl+-',
+                  click: () => {
+                    this.mainWindow.webContents.send('zoomOut');
+                  }
+                },
+                {
+                  label: 'Default Zoom',
+                  click: () => {
+                    this.mainWindow.webContents.send('zoomDefault');
+                  }
                 }
               ]
             : [
@@ -432,6 +487,26 @@ export default class MenuBuilder {
                     this.mainWindow.setFullScreen(
                       !this.mainWindow.isFullScreen()
                     );
+                  }
+                },
+                {
+                  label: 'Zoom In',
+                  accelerator: 'CommandOrControl+=',
+                  click: () => {
+                    this.mainWindow.webContents.send('zoomIn');
+                  }
+                },
+                {
+                  label: 'Zoom Out',
+                  accelerator: 'Ctrl+-',
+                  click: () => {
+                    this.mainWindow.webContents.send('zoomOut');
+                  }
+                },
+                {
+                  label: 'Default Zoom',
+                  click: () => {
+                    this.mainWindow.webContents.send('zoomDefault');
                   }
                 }
               ]
@@ -456,25 +531,31 @@ export default class MenuBuilder {
           {
             label: il8n.support,
             click: () => {
-              shell.openExternal('https://discord.gg/P7urHQs');
+              shell.openExternal(`${Configure.DiscordURL}`);
             }
           },
           {
             label: il8n.about,
             click: () => {
-              shell.openExternal(Configuration.GitHubRepo);
+              shell.openExternal(
+                `${Configure.GitHubRepo}/issues#readme`
+              );
             }
           },
           {
             label: il8n.report_bug,
             click: () => {
-              shell.openExternal(`${Configuration.GitHubRepo}/issues`);
+              shell.openExternal(
+                `${Configure.GitHubRepo}/issues`
+              );
             }
           },
           {
             label: il8n.feature_request,
             click: () => {
-              shell.openExternal(`${Configuration.GitHubRepo}/issues`);
+              shell.openExternal(
+                `${Configure.GitHubRepo}/issues`
+              );
             }
           }
         ]

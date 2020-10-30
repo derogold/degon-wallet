@@ -1,4 +1,5 @@
 // Copyright (C) 2019 ExtraHash
+// Copyright (C) 2019, WrkzCoin
 //
 // Please see the included LICENSE file for more information.
 import fs from 'fs';
@@ -8,14 +9,14 @@ import jdenticon from 'jdenticon';
 import {
   validateAddress,
   validatePaymentID
-} from 'turtlecoin-wallet-backend/dist/lib/ValidateParameters';
+} from 'turtlecoin-wallet-backend';
 import NavBar from './NavBar';
 import BottomBar from './BottomBar';
 import Redirector from './Redirector';
 import { uiType } from '../utils/utils';
 import { addressList, directories, loginCounter, config } from '../index';
 import routes from '../constants/routes';
-import Configuration from '../../Configure';
+import Configure from '../../Configure';
 
 type State = {
   darkMode: boolean,
@@ -148,7 +149,7 @@ class AddressBook extends Component<Props, State> {
     let badAddress = false;
     let badPaymentID = false;
 
-    if (!validateAddress(newAddress, true, Configuration)) {
+    if (!validateAddress(newAddress, true, Configure)) {
       badAddress = true;
     } else {
       badAddress = false;

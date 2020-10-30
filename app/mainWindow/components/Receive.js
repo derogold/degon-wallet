@@ -5,6 +5,8 @@ import crypto from 'crypto';
 import React, { Component } from 'react';
 import QRCode from 'qrcode.react';
 import ReactTooltip from 'react-tooltip';
+import Configure from '../../Configure';
+
 import {
   createIntegratedAddress,
   validatePaymentID
@@ -14,7 +16,6 @@ import NavBar from './NavBar';
 import BottomBar from './BottomBar';
 import Redirector from './Redirector';
 import { uiType } from '../utils/utils';
-import Configuration from '../../Configure';
 
 type Props = {
   copyToClipboard: string => void
@@ -71,7 +72,7 @@ export default class Receive extends Component<Props, State> {
     const integratedAddress = createIntegratedAddress(
       session.getPrimaryAddress(),
       paymentID,
-      Configuration
+	  Configure
     );
     this.setState({
       masterSwitch: true,

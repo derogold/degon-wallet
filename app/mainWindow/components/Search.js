@@ -24,7 +24,7 @@ import {
 } from '../index';
 import routes from '../constants/routes';
 import settings from '../constants/settings';
-import Configuration from '../../Configure';
+import Configure from '../../Configure';
 
 type Props = {
   query: string
@@ -135,6 +135,7 @@ export default class Search extends Component<Props, States> {
     message: any
   ) => {
     const { messageType, data } = message;
+
     if (messageType === 'transactionSearchResponse') {
       this.setState({
         transactionResults: data,
@@ -157,9 +158,8 @@ export default class Search extends Component<Props, States> {
 
   openSearchInExplorer = () => {
     const { query } = this.state;
-
     remote.shell.openExternal(
-      `${Configuration.ExplorerURL}/?search=${encodeURIComponent(query)}`
+      `${Configure.ExplorerURL}/transaction.html?hash=${encodeURIComponent(query)}`
     );
   };
 
@@ -167,7 +167,7 @@ export default class Search extends Component<Props, States> {
     const hash = event.target.value;
 
     remote.shell.openExternal(
-      `${Configuration.ExplorerURL}/?search=${encodeURIComponent(hash)}`
+      `${Configure.ExplorerURL}/transaction.html?hash=${encodeURIComponent(hash)}`
     );
   };
 
@@ -408,7 +408,7 @@ export default class Search extends Component<Props, States> {
                       blockHeight
                     } = tx;
 
-                    const amount = tx.totalAmount;
+                    const amount = tx.totalTxAmount;
                     const rowIsExpanded = expandedRows.includes(hash);
                     const toggleSymbol = rowIsExpanded ? '-' : '+';
                     return (
@@ -438,7 +438,7 @@ export default class Search extends Component<Props, States> {
                           {amount < 0 && (
                             <td>
                               <p className="has-text-danger has-text-right">
-                                {displayCurrency === 'TRTL' &&
+                                {displayCurrency === Configure.ticker &&
                                   atomicToHuman(amount, true)}
                                 {displayCurrency === 'fiat' &&
                                   symbolLocation === 'prefix' &&
@@ -469,7 +469,7 @@ export default class Search extends Component<Props, States> {
                           {amount > 0 && (
                             <td>
                               <p className="has-text-right">
-                                {displayCurrency === 'TRTL' &&
+                                {displayCurrency === Configure.ticker &&
                                   atomicToHuman(amount, true)}
                                 {displayCurrency === 'fiat' &&
                                   symbolLocation === 'prefix' &&
@@ -544,7 +544,7 @@ export default class Search extends Component<Props, States> {
                                       {hash} <br />
                                       {paymentID !== '' ? paymentID : 'none'}
                                       <br />
-                                      {atomicToHuman(fee, true)} TRTL
+                                      {atomicToHuman(fee, true)} Configure.ticker
                                       <br />
                                       <p
                                         className={
@@ -553,7 +553,7 @@ export default class Search extends Component<Props, States> {
                                             : ''
                                         }
                                       >
-                                        {atomicToHuman(amount, true)} TRTL
+                                        {atomicToHuman(amount, true)} Configure.ticker
                                       </p>
                                       <br />
                                       <br />

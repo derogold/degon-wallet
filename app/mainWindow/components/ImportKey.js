@@ -5,13 +5,13 @@ import React, { Component } from 'react';
 import ReactTooltip from 'react-tooltip';
 import { remote } from 'electron';
 import log from 'electron-log';
-import { WalletBackend } from 'turtlecoin-wallet-backend';
+import { WalletBackend, Daemon } from 'turtlecoin-wallet-backend';
 import NavBar from './NavBar';
 import BottomBar from './BottomBar';
 import Redirector from './Redirector';
 import { uiType } from '../utils/utils';
 import { eventEmitter, reInitWallet, config } from '../index';
-import Configuration from '../../Configure';
+import Configure from '../../Configure';
 
 type State = {
   darkMode: boolean,
@@ -118,7 +118,7 @@ export default class ImportKey extends Component<Props, State> {
     });
   };
 
-  nextPage = () => {
+  nextPage = async () => {
     const {
       activePage,
       password,
@@ -133,11 +133,12 @@ export default class ImportKey extends Component<Props, State> {
     let currentPageNumber: number = this.evaluatePageNumber(activePage);
 
     if (currentPageNumber === 1) {
-      const [restoredWallet, error] = WalletBackend.importWalletFromKeys(
-        Configuration.defaultDaemon,
+      const [restoredWallet, error] = await WalletBackend.importWalletFromKeys(
+        Configure.defaultDaemon,
         scanHeight === '' ? 0 : Number(scanHeight),
         privateViewKey,
-        privateSpendKey
+        privateSpendKey,
+        Configure
       );
 
       if (error) {
@@ -169,18 +170,21 @@ export default class ImportKey extends Component<Props, State> {
         defaultPath: remote.app.getPath('documents'),
         filters: [
           {
-            name: 'TurtleCoin Wallet File (v0)',
+            name: 'DeroGold Wallet File (v0)',
             extensions: ['wallet']
           }
         ]
       };
-      const savePath = remote.dialog.showSaveDialog(null, options);
-      if (savePath === undefined) {
+      const response = await remote.dialog.showSaveDialog(null, options);
+      if (response.canceled) {
         return;
       }
-      const saved = importedWallet.saveWalletToFile(savePath, password);
+      const saved = importedWallet.saveWalletToFile(
+        `${response.filePath}`,
+        password
+      );
       if (saved) {
-        reInitWallet(savePath);
+        reInitWallet(`${response.filePath}`);
       } else {
         const message = (
           <div>

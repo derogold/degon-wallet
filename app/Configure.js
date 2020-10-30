@@ -83,6 +83,11 @@ const Configure = new function () {
   this.minimumFee = 1000000;
 
   /**
+   * Fee per byte height, a place holder only
+   */
+   this.feePerByteHeight = 5000000;
+
+  /**
    * Mapping of height to mixin maximum and mixin minimum
    */
   this.mixinLimits = new MixinLimits(
@@ -171,9 +176,9 @@ const Configure = new function () {
 
   this.ExplorerURL = 'http://cuveedego.czech.cloud';
 
-  this.GitHubRepo = 'https://github.com/derogold/dego-wallet-pluton';
+  this.GitHubRepo = 'https://github.com/derogold/wallet-degon-pluton';
 
-  this.DiscordURL = 'https://derogold.gq';
+  this.DiscordURL = 'https://derogold.com';
 }
 
 export default Configure;

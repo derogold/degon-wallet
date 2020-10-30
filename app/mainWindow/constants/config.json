@@ -1,6 +1,6 @@
 {
   "walletFile": "",
-  "enableAutoOptimization": true,
+  "enableAutoOptimization": false,
   "scanCoinbaseTransactions": false,
   "autoSelectDaemon": true,
   "minimizeToTray": false,
@@ -13,6 +13,7 @@
   "fiatSymbol": "$",
   "symbolLocation": "prefix",
   "fiatDecimals": 2,
+  "selectedTimeZone": "local",
   "autoLockInterval": 15,
   "autoLockEnabled": true,
   "useLocalDaemon": false,
