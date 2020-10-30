@@ -12,7 +12,7 @@
   "selectedFiat": "usd",
   "fiatSymbol": "$",
   "symbolLocation": "prefix",
-  "fiatDecimals": 2,
+  "fiatDecimals": 6,
   "selectedTimeZone": "local",
   "autoLockInterval": 15,
   "autoLockEnabled": true,

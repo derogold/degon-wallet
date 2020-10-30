@@ -42,7 +42,7 @@ const Configure = new function () {
   /**
    * The block time of your coin, in seconds
    */
-  this.blockTargetTime = 20;
+  this.blockTargetTime = 300;
 
   /**
    * How often to process blocks, in millseconds
@@ -75,7 +75,12 @@ const Configure = new function () {
    * Most people haven't mined any blocks, so lets not waste time scanning
    * them
    */
-  this.scanCoinbaseTransactions = true;
+  this.scanCoinbaseTransactions = false;
+
+  /**
+   * Disable AutoOptimization by default
+   */
+  this.enableAutoOptimization = false;
 
   /**
    * The minimum fee allowed for transactions, in ATOMIC units
