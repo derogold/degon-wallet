@@ -49,8 +49,8 @@ let backendReady = false;
 let configReady = false;
 
 const directories = [
-  `${homedir}/.degonwallet`,
-  `${homedir}/.degonwallet/logs`
+  `${homedir}/.plutonDegonWallet`,
+  `${homedir}/.plutonDegonWallet/logs`
 ];
 
 const [programDirectory] = directories;
