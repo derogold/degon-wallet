@@ -1,4 +1,5 @@
 // Copyright (C) 2019 ExtraHash
+// Copyright (C) 2020 DeroGold Developers
 //
 // Please see the included LICENSE file for more information.
 
@@ -20,7 +21,7 @@ const Configure = new function () {
   /**
    * How often to save the wallet, in milliseconds
    */
-  this.walletSaveFrequency = 60 * 1000;
+  this.walletSaveFrequency = 120 * 1000;
 
   /**
    * The amount of decimal places your coin has, e.g. TurtleCoin has two
@@ -37,7 +38,7 @@ const Configure = new function () {
   /**
    * Request timeout for daemon operations in milliseconds
    */
-  this.requestTimeout = 30 * 1000;
+  this.requestTimeout = 50 * 1000;
 
   /**
    * The block time of your coin, in seconds
@@ -47,24 +48,24 @@ const Configure = new function () {
   /**
    * How often to process blocks, in millseconds
    */
-  this.syncThreadInterval = 10;
+  this.syncThreadInterval = 5;
 
   /**
    * How often to update the daemon info, in milliseconds
    */
-  this.daemonUpdateInterval = 15 * 1000;
+  this.daemonUpdateInterval = 10 * 1000;
 
   /**
    * How often to check on locked transactions
    */
-  this.lockedTransactionsCheckInterval = 30 * 1000;
+  this.lockedTransactionsCheckInterval = 300 * 1000;
 
   /**
    * The amount of blocks to process per 'tick' of the mainloop. Note: too
    * high a value will cause the event loop to be blocked, and your interaction
    * to be laggy.
    */
-  this.blocksPerTick = 100;
+  this.blocksPerTick = 10;
 
   /**
    * Your coins 'ticker', generally used to refer to the coin, i.e. 123 TRTL
@@ -75,7 +76,7 @@ const Configure = new function () {
    * Most people haven't mined any blocks, so lets not waste time scanning
    * them
    */
-  this.scanCoinbaseTransactions = false;
+  this.scanCoinbaseTransactions = true;
 
   /**
    * Disable AutoOptimization by default
@@ -86,11 +87,6 @@ const Configure = new function () {
    * The minimum fee allowed for transactions, in ATOMIC units
    */
   this.minimumFee = 1000000;
-
-  /**
-   * Fee per byte height, a place holder only
-   */
-   this.feePerByteHeight = 5000000;
 
   /**
    * Mapping of height to mixin maximum and mixin minimum
@@ -118,14 +114,14 @@ const Configure = new function () {
   this.integratedAddressLength = 97 + (64 * 11) / 8;
 
   /**
-   * Memory to use for storing downloaded blocks - 32MB
+   * Memory to use for storing downloaded blocks - 64MB
    */
   this.blockStoreMemoryLimit = 1024 * 1024 * 64;
 
   /**
    * Amount of blocks to request from the daemon at once
    */
-  this.blocksPerDaemonRequest = 20;
+  this.blocksPerDaemonRequest = 10;
 
   /**
    * User agent string
@@ -168,7 +164,7 @@ const Configure = new function () {
    * Default daemon to use. Can either be a BlockchainCacheApi(baseURL, SSL),
    * or a ConventionalDaemon(url, port).
    */
-  this.defaultDaemon = new Daemon('dego.bot.tips', 443);
+  this.defaultDaemon = new Daemon('publicnode.ydns.eu', 6969);
 
   /**
    * A url to fetch node info from. Should follow the turtlepay format
@@ -181,7 +177,7 @@ const Configure = new function () {
 
   this.ExplorerURL = 'http://cuveedego.czech.cloud';
 
-  this.GitHubRepo = 'https://github.com/derogold/wallet-degon-pluton';
+  this.GitHubRepo = 'https://github.com/derogold/degon-wallet';
 
   this.DiscordURL = 'https://derogold.com';
 }

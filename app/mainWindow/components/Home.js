@@ -422,7 +422,7 @@ export default class Home extends Component<Props, State> {
                 <div className={`box ${fillColor}`}>
                   <p className={`${textColor} title has-text-centered`}>
                     <i className="fas fa-robot" />
-                    &nbsp;&nbsp;Welcome to Pluton!
+                    &nbsp;&nbsp;Welcome to Degon!
                   </p>
                   <br />
                   <p className={`${textColor} subtitle has-text-centered`}>
