@@ -13,7 +13,7 @@
 
 ![Development Build Status](https://github.com/derogold/wallet-degon/workflows/Build%20Proton/badge.svg?branch=development)
 
-<img src="https://raw.githubusercontent.com/derogold/degon-wallet/blob/master/screenshots/screenshot.png">
+<img src="https://raw.githubusercontent.com/derogold/degon-wallet/master/screenshots/screenshot.png">
 <p>
   Degon Wallet is a DeroGold wallet that uses <a href="http://electron.atom.io/">Electron</a>, <a href="https://facebook.github.io/react/">React</a>, <a href="https://github.com/turtlecoin/turtlecoin-wallet-backend-js">Turtlecoin-Wallet-Backend-JS</a>, <a href="https://github.com/reactjs/redux">Redux</a>, <a href="https://github.com/reactjs/react-router">React Router</a>, <a href="http://webpack.github.io/docs/">Webpack</a> and <a href="https://github.com/gaearon/react-hot-loader">React Hot Loader</a>.
 </p>
